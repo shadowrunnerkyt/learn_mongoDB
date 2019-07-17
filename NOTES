@@ -1,0 +1,12 @@
+[mongoDB]  
+	$ mongo // opens interactive  
+	> show dbs // lists available dbs  
+	> use $dbName // switches to db  
+	> show collections // shows collections (duh)  
+	> db.createCollection('$collectionName') // will create a collection in the current db with $collectionName  
+	> db.$collectionName.insert({key: "value", ... })  
+	> db.$collectionName.find() // appears to return everything in the collection
+	> db.$collectionName.find().pretty() // breaks the results into a vertical list (easier to read)
+	> db.$collectionName.insert([{first_name:'one', last_name:'one'},{first_name:'two', last_name:'two'}])
+	> db.$collectionName.findOne({key:'value'}) # return just the record matching the key:value
+	
