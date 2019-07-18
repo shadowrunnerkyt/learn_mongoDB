@@ -1,4 +1,4 @@
-[mongoDB]<https:#www.mongodb.com/>  
+[mongoDB]<https://www.mongodb.com/>  
 	# opens interactive
 	$ mongo   
 	# lists available dbs  
@@ -45,10 +45,12 @@
 	PUT - Update or replace data
 	DELETE - Remote or destroy data
 
-[node.js]<https:#nodejs.org/>
+[node.js]<https://nodejs.org/>
 	# Node.js v12.x:
 	# Using Ubuntu
 	curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 	sudo apt-get install -y nodejs
 	# install dependencies
 	sudo npm install express body-parser mongojs
+
+[express.js]<https://expressjs.com/>
