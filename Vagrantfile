@@ -83,13 +83,23 @@ Vagrant.configure("2") do |config|
 	SHELL
   end
 
-#   config.vm.define "app" do  |app|
-# 	app.vm.box = "bento/centos-7.4"
-# 	app.vm.hostname = "nodejs"
-# 	app.vm.network "private_network", ip: "192.168.33.20"
-# 	app.vm.provision "file", source: "node.service", destination: "/tmp/node.service"
-# 	app.vm.provision "shell", path: "node.sh", privileged: true
-#   end
+  config.vm.define "app" do  |app|
+	app.vm.box = "ubuntu/bionic64"
+	app.vm.hostname = "nodejs"
+	app.vm.network "private_network", ip: "192.168.33.20"
+	app.vm.provision "file", source: "node.service", destination: "/tmp/node.service"
+	app.vm.provision "shell", path: "node.sh", privileged: true
+	# db.vm.provision :shell, inline: <<-SHELL
+	# 	sudo apt-get update
+	# 	curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+	# 	sudo apt-get install -y nodejs
+	# # 	sudo sed -i 's/bind_ip = 127.0.0.1/bind_ip = 0.0.0.0/' /etc/mongodb.conf
+	# # 	sudo mkdir -p /data/db
+	# # 	sudo chmod 755 /data/db
+	# # 	sudo systemctl enable mongodb
+	# # 	sudo systemctl restart mongodb
+	# SHELL
+  end
 #   config.vm.define "web" do  |web|
 # 	web.vm.box = "bento/centos-7.4"
 # 	web.vm.hostname = "nginx"

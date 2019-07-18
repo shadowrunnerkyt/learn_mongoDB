@@ -1,21 +1,54 @@
-[mongoDB]  
-	$ mongo // opens interactive  
-	> show dbs // lists available dbs  
-	> use $dbName // switches to db  
-	> show collections // shows collections (duh)  
-	> db.createCollection('$collectionName') // will create a collection in the current db with $collectionName  
+[mongoDB]<https:#www.mongodb.com/>  
+	# opens interactive
+	$ mongo   
+	# lists available dbs  
+	> show dbs 
+	# switches to db
+	> use $dbName  
+	# shows collections (duh) 
+	> show collections   
+	# will create a collection in the current db with $collectionName  
+	> db.createCollection('$collectionName') 
+	# inserts one thing with one or more attributes
 	> db.$collectionName.insert({key: "value", ... })  
-	> db.$collectionName.insert([{first_name:'one', last_name:'one'}, {first_name:'two', last_name:'two'}]) // inserts array of things
-	> db.$collectionName.find() // appears to return everything in the collection
-	> db.$collectionName.find().pretty() // breaks the results into a vertical list (easier to read)
-	> db.$collectionName.find({key:'value'}, {key1:1}) // find record, return all matching key1
-	> db.$collectionName.find({key:'value'}, {"key1.subkey":1}) // find record, return all matching subkeys
-	> db.$collectionName.findOne({key:'value'}) // return just the record matching the key:value
-	> db.$collectionName.update({key1:'value'}, {key1:'value', key2:'value',...}) //completely overwrites the whole record
-	> db.$collectionName.update({key1:'value'}, {$set:{key2:'value'}}) // updates just the one key:value from the $set:
-	> db.$collectionName.update({key1:'value'}, {$set:{key2:'value',key3:123}}, {upsert: true}) // upsert if not found
-	> db.$collectionName.update({key1:'value'}, {$unset:{key2:'value'}}) // removes a key:value from the record
-	> db.$collectionName.update({key:'value'}, {$push:{objectKey:{subkey1:'value', subkey2:'value'}}}) // adds to existing record
-	> db.$collectionName.remove({key:'value'}) // removes the whole record
-	> db.$collectionName.remove({key:{$gt:30}}) // removes the whole record where key > 30
+	# inserts array of things
+	> db.$collectionName.insert([{first_name:'one', last_name:'one'}, {first_name:'two', last_name:'two'}])
+	# return everything in the collection
+	> db.$collectionName.find() 
+	# breaks the results into a vertical list (easier to read)
+	> db.$collectionName.find().pretty() 
+	# find record, return all matching key1
+	> db.$collectionName.find({key:'value'}, {key1:1}) 
+	# find record, return all matching subkeys
+	> db.$collectionName.find({key:'value'}, {"key1.subkey":1}) 
+	# return just the record matching the key:value
+	> db.$collectionName.findOne({key:'value'}) 
+	# completely overwrites the whole record
+	> db.$collectionName.update({key1:'value'}, {key1:'value', key2:'value',...})
+	# updates just the one key:value from the $set:
+	> db.$collectionName.update({key1:'value'}, {$set:{key2:'value'}})
+	# adds thing if key1 not found
+	> db.$collectionName.update({key1:'value'}, {$set:{key2:'value',key3:123}}, {upsert: true})
+	# removes a key:value from the record
+	> db.$collectionName.update({key1:'value'}, {$unset:{key2:'value'}}) 
+	# adds to existing record
+	> db.$collectionName.update({key:'value'}, {$push:{objectKey:{subkey1:'value', subkey2:'value'}}})
+	# removes the whole record
+	> db.$collectionName.remove({key:'value'})
+	# removes the whole record where key > 30
+	> db.$collectionName.remove({key:{$gt:30}})
 	> 
+
+[HTTP verbs]
+	GET - reads data
+	POST - Create or insert data
+	PUT - Update or replace data
+	DELETE - Remote or destroy data
+
+[node.js]<https:#nodejs.org/>
+	# Node.js v12.x:
+	# Using Ubuntu
+	curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+	sudo apt-get install -y nodejs
+	# install dependencies
+	sudo npm install express body-parser mongojs
