@@ -8,5 +8,10 @@
 	> db.$collectionName.find() // appears to return everything in the collection
 	> db.$collectionName.find().pretty() // breaks the results into a vertical list (easier to read)
 	> db.$collectionName.insert([{first_name:'one', last_name:'one'},{first_name:'two', last_name:'two'}])
-	> db.$collectionName.findOne({key:'value'}) # return just the record matching the key:value
-	
+	> db.$collectionName.findOne({key:'value'}) // return just the record matching the key:value
+	> db.$collectionName.update({key1:'value'}, {key1:'value', key2:'value',...}) //completely overwrites the whole record
+	> db.$collectionName.update({key1:'value'}, {$set:{key2:'value'}}) // updates just the one key:value from the $set:
+	> db.$collectionName.update({key1:'value'},{$set:{key2:'value',key3:123}}, {upsert: true}) // upsert if not found
+	> db.$collectionName.update({key1:'value'}, {$unset:{key2:'value'}}) // removes a key:value from the record
+	> db.$collectionName.remove({key:'value'}) // removes the whole record
+	> db.$collectionName.remove({key:{$gt:30}}) // removes the whole record where key > 30
