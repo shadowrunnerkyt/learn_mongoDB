@@ -1,0 +1,17 @@
+db.products.insert({
+	name:'Amazon Fire Tablet',
+	catagory:'Electronics',
+	model_number:'B07FKR6KXF',
+	price:49.99,
+	images:'https://www.staples-3p.com/s7/is/image/Staples/sp55890735_sc7?wid=512&hei=512',
+	details: 'Faster processor: With a quad-core 1.3 GHz processor, quickly and easily switch between apps, stream movies, and browse the web.'
+});
+
+db.products.insert({
+	name:'Samsung Galaxy Tab S4',
+	catagory:'Electronics',
+	model_number:'SM-T830NZAAXAR',
+	price:701.99,
+	images:'https://smedia.webcollage.net/rwvfp/wc/live/samsungus-20190327135817/module/samsungus//s2/grey_s4_gal-4.jpg.w960.jpg',
+	details: 'The Perfect Work & Play Companion: From the conference room to the living room and beyond, the Galaxy Tab boosts your fun and productivity wherever life takes you.'
+});

@@ -52,5 +52,7 @@
 	sudo apt-get install -y nodejs
 	# install dependencies
 	sudo npm install express body-parser mongojs
+	# install for testing so we don't have to keep reloading node when there are changes
+	sudo npm install -g nodemon
 
 [express.js]<https://expressjs.com/>

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongojs = require('mongojs');
-
+const db = mongojs('mongodb://192.168.33.10/catalog', ['products'])
 const app = express();
 const port = 3000;
 
@@ -14,12 +14,24 @@ app.get('/', (req, res, next) => {
 
 // Fetch all products
 app.get('/api/products', (req, res, next) => {
-	res.send('List products');
+	db.products.find((err, docs) => {
+		if(err) {
+			res.send(err);
+		}
+		console.log('Products Found...');
+		res.json(docs);
+	});
 });
 
 // Fetch single product
 app.get('/api/products/:id', (req, res, next) => {
-	res.send('Fetch product '+req.params.id);
+	db.products.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+		if(err) {
+			res.send(err);
+		}
+		console.log('Product Found...');
+		res.json(doc);
+	});
 });
 
 // Add product
