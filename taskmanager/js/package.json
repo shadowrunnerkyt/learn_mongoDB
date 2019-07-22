@@ -1,0 +1,17 @@
+{
+	"name": "task-manager",
+	"version": "1.0.0",
+	"description": "Simple REST api task app",
+	"main": "taskserver.js",
+    "scripts": {
+		"start": "node taskserver.js",
+		"test": "echo \"No test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "body-parser": "^1.19.0",
+        "mongojs": "^2.6.0"
+    }
+}
