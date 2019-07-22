@@ -2,9 +2,9 @@
 	"name": "catalog",
 	"version": "1.0.0",
 	"description": "Simple REST api catalog app",
-	"main": "app.js",
+	"main": "catalog.js",
     "scripts": {
-		"start": "node app.js",
+		"start": "node catalog.js",
 		"test": "echo \"No test specified\" && exit 1"
 	},
 	"author": "",

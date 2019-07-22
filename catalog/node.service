@@ -2,7 +2,7 @@
 Description=NodeJS application server
 
 [Service]
-ExecStart=/opt/catalog/app.js
+ExecStart=/opt/catalog/catalog.js
 Restart=always
 User=nobody
 Group=nobody

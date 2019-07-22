@@ -16,8 +16,8 @@ cd $appdir
 sudo npm install express body-parser mongojs
 # install for testing so we don't have to keep reloading node when there are changes
 # sudo npm install -g nodemon
-echo "Making the server.js file executable"
-chmod +x app.js
+echo "Making the catalog.js file executable"
+chmod +x catalog.js
 echo "Starting the application"
 systemctl enable node
 systemctl restart node
