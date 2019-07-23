@@ -28,9 +28,7 @@ app.get('/', (req, res, next) => {
 // Fetch all categories
 app.get('/taskmanager/categories', (req, res, next) => {
 	db.categories.find((err, docs) => {
-		if(err) {
-			res.send(err);
-		}
+		if(err) {res.send(err);}
 		console.log('Categories Found...');
 		res.json(docs);
 	});
@@ -39,9 +37,7 @@ app.get('/taskmanager/categories', (req, res, next) => {
 // Fetch all tasks
 app.get('/taskmanager/tasks', (req, res, next) => {
 	db.tasks.find((err, docs) => {
-		if(err) {
-			res.send(err);
-		}
+		if(err) {res.send(err);}
 		console.log('Tasks Found...');
 		res.json(docs);
 	});
@@ -50,9 +46,7 @@ app.get('/taskmanager/tasks', (req, res, next) => {
 // Fetch single product
 app.get('/api/products/:id', (req, res, next) => {
 	db.products.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
-		if(err) {
-			res.send(err);
-		}
+		if(err) {res.send(err);}
 		console.log('Product Found...');
 		res.json(doc);
 	});
@@ -61,10 +55,8 @@ app.get('/api/products/:id', (req, res, next) => {
 // Add task
 app.post('/taskmanager/tasks', (req, res, next) => {
 	db.tasks.insert(req.body), (err, doc) =>{
-		if(err){
-			res.send(err);
-		}
-		console.log('Adding task...');
+		if(err){res.send(err);}
+		console.log('Adding task... '+req.body.task_name);
 		res.json(doc);
 	}
 });
@@ -79,11 +71,9 @@ app.put('/api/products/:id', (req, res, next) => {
 				details: req.body.details
 			}},
 		new: true}, (err, doc) => {
-			if(err){
-				res.send(err);
-			}
-		console.log('Updating product...');
-		res.json(doc);
+			if(err){res.send(err);}
+			console.log('Updating product...');
+			res.json(doc);
 	});
 });
 

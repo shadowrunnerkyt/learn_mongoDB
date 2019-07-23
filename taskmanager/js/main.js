@@ -9,6 +9,7 @@ $(document).ready(function(){
 	getCategoryOptions();
 
 	$("#submitTask").click(addTask);
+	$("body").on('click','.btn-edit-task',setTask);
 });
 
  function getTasks(){
@@ -21,19 +22,19 @@ $(document).ready(function(){
 			if(task.is_urgent){
 				output += '<span class="label label-danger">Urgent</span>';
 			}
-			output += '<span class="float-right"><a class="btn btn-primary btn-sm" href="#">Edit</a> <a class="btn btn-outline-danger btn-sm" href="#">Delete</a></span>';
+			output += '<span class="float-right"><a class="btn btn-primary btn-sm btn-edit-task" data-task-name="'+task.task_name+'" data-task-id="'+task._id+'" title="Edit:'+task._id+'">Edit</a> <a class="btn btn-outline-danger btn-sm" href="#">Delete</a></span>';
 		});
 		output += '</ul>';
 		$('#tasks').html(output);
 	});
 }
 
-function addTask(e){
+function addTask(event){
 	let task_name = $("#task_name").val();
 	let category = $('#category').val();
 	let due_date = $('#due_date').val();
 	let is_urgent = ($('#is_urgent').val() == "true") ? true : false ;
-	alert('task_name='+task_name+'\ncategory='+category+'\ndue_date='+due_date+'\nis_urgent='+$('#is_urgent').val()+'('+is_urgent+')');
+	// alert('task_name='+task_name+'\ncategory='+category+'\ndue_date='+due_date+'\nis_urgent='+$('#is_urgent').val()+'('+is_urgent+')');
 	$.ajax({
 		url:'http://192.168.33.20:3001/taskmanager/tasks',
 		data: JSON.stringify({
@@ -44,14 +45,17 @@ function addTask(e){
 		}),
 		type: 'POST',
 		contentType: 'application/json',
-		success: function(data){
-			window.location.href='index.html';
-		},
-		error: function(xhr, status, err){
-			console.log(err);
-		}
+		success: goHome(),
+		error: errAlert()
 	});
-	// e.preventDefault();
+	event.preventDefault();
+}
+
+function errAlert(xhr, status, err){if(err){alert(err)};}
+
+function goHome(){
+	alert('going home');
+	window.location.replace("index.html");
 }
 
 function getCategoryOptions(){
@@ -62,4 +66,11 @@ function getCategoryOptions(){
 		});
 		$('#category').append(output);
 	});
+}
+
+function setTask(){
+	let task_id = $(this).data('task-id');
+	sessionStorage.setItem('current_id', task_id);
+	window.location.replace("edittask.html");
+	return false
 }
