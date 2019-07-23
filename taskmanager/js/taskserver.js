@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 
 // Home
 app.get('/', (req, res, next) => {
-	res.send('Please use /taskmanager/categories');
+	res.send('Please use /taskmanager/tasks');
 });
 
 // Fetch all categories
@@ -58,13 +58,13 @@ app.get('/api/products/:id', (req, res, next) => {
 	});
 });
 
-// Add product
-app.post('/api/products', (req, res, next) => {
-	db.products.insert(req.body), (err, doc) =>{
+// Add task
+app.post('/taskmanager/tasks', (req, res, next) => {
+	db.tasks.insert(req.body), (err, doc) =>{
 		if(err){
 			res.send(err);
 		}
-		console.log('Adding product...');
+		console.log('Adding task...');
 		res.json(doc);
 	}
 });
