@@ -9,7 +9,13 @@
  });
 
  function getTasks(){
-	 $.get('http://', function(data){
-		 console.log(data);
+	$.get('http://192.168.33.20:3001/taskmanager/tasks', function(data){
+		let output = '<ul class="list-group">';
+		$.each(data, function(key, task){
+			output += '<li class="list-group-item">';
+			output += task.task_name+'<span class="due_on">[Due on: '+task.due_date+']</span>';
+		});
+		output += '</ul>';
+		$('#tasks').html(output);
 	 });
  }
