@@ -5,8 +5,8 @@
  *******************************************/
 
 $(document).ready(function(){
-	getTasks();
-	getCategoryOptions();
+	// getTasks();
+	// getCategoryOptions();
 
 	$("#submitTask").click(addTask);
 	$("#updateTask").click(updateTask);
