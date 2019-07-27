@@ -51,9 +51,14 @@
 	curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 	sudo apt-get install -y nodejs
 	# install dependencies
-	sudo npm install express body-parser mongojs
+	sudo npm install express body-parser mongojs cors
 	# install for testing so we don't have to keep reloading node when there are changes
 	sudo npm install -g nodemon
 
 [express.js]<https://expressjs.com/>
 	CORS on ExpressJS => <https://enable-cors.org/server_expressjs.html>
+
+[Ubuntu]
+	# set my timezome
+	sudo timedatectl set-timezone America/Kentucky/Louisville
+	
