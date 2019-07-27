@@ -43,38 +43,40 @@ app.get('/taskmanager/tasks', (req, res, next) => {
 	});
 });
 
-// Fetch single product
-app.get('/api/products/:id', (req, res, next) => {
-	db.products.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+// Fetch single task
+app.get('/taskmanager/tasks/:id', (req, res, next) => {
+	console.log('Retrieving task: '+req.params.id);
+	db.tasks.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
 		if(err) {res.send(err);}
-		console.log('Product Found...');
 		res.json(doc);
 	});
 });
 
 // Add task
 app.post('/taskmanager/tasks', (req, res, next) => {
+	console.log('Adding task... '+req.body.task_name);
 	db.tasks.insert(req.body), (err, doc) =>{
 		if(err){res.send(err);}
-		console.log('Adding task... '+req.body.task_name);
 		res.json(doc);
 	}
 });
 
-// Update a product
-app.put('/api/products/:id', (req, res, next) => {
-	db.products.findAndModify({query: {_id: mongojs.ObjectId(req.params.id)}, 
-		update:{
-			$set:{
-				name: req.body.name,
-				category: req.body.category,
-				details: req.body.details
-			}},
-		new: true}, (err, doc) => {
+// Update a task
+app.put('/taskmanager/tasks/:id', (req, res, next) => {
+	console.log('Updating task: '+req.body.task_name);
+	let task_id = mongojs.ObjectId(req.params.id);
+	db.tasks.update(
+		{_id : task_id},
+		{$set: {
+			task_name: req.body.task_name,
+			category: req.body.category,
+			due_date: req.body.due_date,
+			is_urgent: req.body.is_urgent
+		}}, 
+		(err, doc) => {
 			if(err){res.send(err);}
-			console.log('Updating product...');
 			res.json(doc);
-	});
+		});
 });
 
 // Delete a product
