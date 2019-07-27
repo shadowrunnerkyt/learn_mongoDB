@@ -1,7 +1,7 @@
 <!-- ******************************************
-*  Author : Author   
+*  Author : Chris   
 *  Created On : Mon Jul 22 2019
-*  File : edittask.html
+*  File : index.html
 ******************************************* -->
 
 <!DOCTYPE html>
@@ -9,12 +9,106 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Author">
-    <title>#[[$Title$]]#</title>
+    <meta name="Chris" content="Task Manager">
+	<title>Task Manager</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script
+  		src="https://code.jquery.com/jquery-3.4.1.min.js"
+  		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </head>
 
 <body>
-    #[[$END$]]#
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	<a class="navbar-brand" href="#">Task Manager</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home:<span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active">Edit Task</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+			<a class="dropdown-item" href="categories.html">Categories</a>
+        	<a class="dropdown-item" href="addcategory.html">Add Category</a>
+        	<a class="dropdown-item" href="addtask.html">Add Task</a>
+        	<a class="dropdown-item" href="editcategory.html">Edit Category</a>
+        	<a class="dropdown-item" href="edittask.html">Edit Task</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<main role="main">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+		<h2>Edit a task</h2>
+			<form id="edit_task">
+				<div class="form-group">
+					<label>Task Name</label>
+					<input type="text" name="task_name" id="task_name" class="form-control" placeholder="Task name">
+				</div>
+				<div class="form-group">
+					<label>Category</label>
+					<select name="category" id="category" class="form-control">
+						<!--  -->
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Due Date</label>
+					<input type="date" name="due_date" id="due_date" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Is Urgent?</label>
+					<select name="is_urgent" id="is_urgent" class="form-control">
+						<option value="false">No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+				<button type="submit" id="updateTask" class="btn btn-primary">Submit</button>
+			</form>
+	  </div>
+    </div>
+
+    <hr>
+
+  </div> <!-- /container -->
+  <script src="js/main.js"></script>
+
+</main>
+
+<footer class="container">
+  <p>&copy; Company 2017-2019</p>
+</footer>
 </body>
+<script>
+	var id = sessionStorage.getItem('current_id');
+	getTask(id);
+</script>
 
 </html>

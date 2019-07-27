@@ -5,6 +5,7 @@
  *******************************************/
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongojs = require('mongojs');
 const db = mongojs('mongodb://192.168.33.10/taskmanager', ['categories','tasks']);
@@ -12,11 +13,18 @@ const app = express();
 const port = 3001;
 
 app.use(bodyParser.json());
+app.options('*', cors({
+	"origin": "*",
+	"methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+	"preflightContinue": false,
+	"optionsSuccessStatus": 204
+  })); 
 
 // To allow cross origin connections from actual local host to Express over HTTP
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
@@ -62,9 +70,9 @@ app.post('/taskmanager/tasks', (req, res, next) => {
 });
 
 // Update a task
-app.put('/taskmanager/tasks/:id', (req, res, next) => {
-	console.log('Updating task: '+req.body.task_name);
+app.put('/taskmanager/tasks/:id', cors(), (req, res, next) => {
 	let task_id = mongojs.ObjectId(req.params.id);
+	console.log('Updating task: '+task_id);
 	db.tasks.update(
 		{_id : task_id},
 		{$set: {

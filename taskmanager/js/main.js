@@ -9,6 +9,7 @@ $(document).ready(function(){
 	getCategoryOptions();
 
 	$("#submitTask").click(addTask);
+	$("#updateTask").click(updateTask);
 	$("body").on('click','.btn-edit-task',setTask);
 });
 
@@ -34,7 +35,6 @@ function addTask(event){
 	let category = $('#category').val();
 	let due_date = $('#due_date').val();
 	let is_urgent = ($('#is_urgent').val() == "true") ? true : false ;
-	// alert('task_name='+task_name+'\ncategory='+category+'\ndue_date='+due_date+'\nis_urgent='+$('#is_urgent').val()+'('+is_urgent+')');
 	$.ajax({
 		url:'http://192.168.33.20:3001/taskmanager/tasks',
 		data: JSON.stringify({
@@ -51,12 +51,36 @@ function addTask(event){
 	event.preventDefault();
 }
 
+var inputData;
+function updateTask(event){
+	event.preventDefault();
+	let task_id = sessionStorage.getItem('current_id');
+	let task_name = $('#task_name').val();
+	let category = $('#category').val();
+	let due_date = $('#due_date').val();
+	let is_urgent = ($('#is_urgent').val() == "true") ? true : false ;
+	inputData = JSON.stringify({
+		"task_name":task_name,
+		"category":category,
+		"due_date":due_date,
+		"is_urgent":is_urgent
+	});
+	$.ajax({
+		url:"http://192.168.33.20:3001/taskmanager/tasks/"+task_id,
+		data: inputData,
+		method: "PUT",
+		contentType: 'application/json',
+		success: goHome(),
+		error: errAlert()
+	});
+}
+
 function errAlert(xhr, status, err){if(err){alert(err)};}
 
 function goHome(){
-	alert('going home');
-	window.location.replace("index.html");
-}
+	console.log(inputData);
+	// alert('going home');
+	window.location.replace("index.html");}
 
 function getCategoryOptions(){
 	$.get('http://192.168.33.20:3001/taskmanager/categories', function(data){
@@ -73,4 +97,14 @@ function setTask(){
 	sessionStorage.setItem('current_id', task_id);
 	window.location.replace("edittask.html");
 	return false
+}
+
+function getTask(id){
+	$.get('http://192.168.33.20:3001/taskmanager/tasks/'+id, function(task){
+		// console.log('editing task: '+task.task_name);
+		$('#task_name').val(task.task_name);
+		$('#category').val(task.category);
+		$('#due_date').val(task.due_date);
+		$('#is_urgent').val(String(task.is_urgent));
+	});
 }
