@@ -1,5 +1,5 @@
 /******************************************
- *  Author : Author   
+ *  Author : Chris Cook   
  *  Created On : Mon Jul 22 2019
  *  File : taskserver.js
  *******************************************/
@@ -87,13 +87,13 @@ app.put('/taskmanager/tasks/:id', cors(), (req, res, next) => {
 		});
 });
 
-// Delete a product
-app.delete('/api/products/:id', (req, res, next) => {
-	db.products.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+// Delete a task
+app.delete('/taskmanager/tasks/:id', (req, res, next) => {
+	console.log('Removing task: '+req.params.id);
+	db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
 		if(err){
 			res.send(err);
 		}
-		console.log('Removing product...');
 		res.json(doc);
 	});
 });

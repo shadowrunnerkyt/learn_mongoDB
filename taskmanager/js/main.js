@@ -5,12 +5,10 @@
  *******************************************/
 
 $(document).ready(function(){
-	// getTasks();
-	// getCategoryOptions();
-
 	$("#submitTask").click(addTask);
 	$("#updateTask").click(updateTask);
 	$("body").on('click','.btn-edit-task',setTask);
+	$("body").on('click','.btn-delete-task',deleteTask);
 });
 
  function getTasks(){
@@ -23,7 +21,7 @@ $(document).ready(function(){
 			if(task.is_urgent){
 				output += '<span class="label label-danger">Urgent</span>';
 			}
-			output += '<span class="float-right"><a class="btn btn-primary btn-sm btn-edit-task" data-task-name="'+task.task_name+'" data-task-id="'+task._id+'" title="Edit:'+task._id+'">Edit</a> <a class="btn btn-outline-danger btn-sm" href="#">Delete</a></span>';
+			output += '<span class="float-right"><a class="btn btn-primary btn-sm btn-edit-task" data-task-name="'+task.task_name+'" data-task-id="'+task._id+'" title="Edit:'+task.task_name+'">Edit</a> <a class="btn btn-outline-danger btn-delete-task btn-sm" data-task-id="'+task._id+'" title="Delete:'+task.task_name+'">Delete</a></span>';
 		});
 		output += '</ul>';
 		$('#tasks').html(output);
@@ -75,12 +73,26 @@ function updateTask(event){
 	});
 }
 
+function deleteTask(){
+	let task_id = $(this).data('task-id');
+	$.ajax({
+		url:"http://192.168.33.20:3001/taskmanager/tasks/"+task_id,
+		method: "DELETE",
+		contentType: 'application/json',
+		async: true,
+		success: goHome(),
+		error: errAlert()
+	});
+}
+
 function errAlert(xhr, status, err){if(err){alert(err)};}
 
 function goHome(){
 	console.log(inputData);
 	// alert('going home');
-	window.location.replace("index.html");}
+	sessionStorage.setItem('current_id', '');
+	window.location.replace("index.html");
+}
 
 function getCategoryOptions(){
 	$.get('http://192.168.33.20:3001/taskmanager/categories', function(data){
