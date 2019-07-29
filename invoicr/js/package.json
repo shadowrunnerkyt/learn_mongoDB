@@ -1,0 +1,18 @@
+{
+	"name": "invoicr",
+	"version": "1.0.0",
+	"description": "Simple REST api invoice app",
+	"main": "invoiceserver.js",
+	"scripts": {
+		"start": "node invoiceserver.js",
+		"test": "echo \"No test specified\" && exit 1"
+	},
+	"author": "Chris Cook",
+	"license": "ISC",
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"mongoose": "^5.6.7"
+	}
+}

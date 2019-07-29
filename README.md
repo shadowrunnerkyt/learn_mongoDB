@@ -24,11 +24,12 @@ Meteorjs photo gallery
 - Meteor crashes VM on start
 - skipping it for now, will revisit later
 
-Invoicer
+Invoicr
 - MEAN stack
 - MongoDB
 - REST API
 - Node.js
+- Angular 2
 
 CDN Finder
 - pend
