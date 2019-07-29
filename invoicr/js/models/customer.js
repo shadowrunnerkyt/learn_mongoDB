@@ -7,28 +7,41 @@
 const mongoose = require('mongoose');
 const customerSchema = mongoose.Schema({
 	first_name: {
-		type: string,
-		required: true
+		type: String,
+		required: true,
+		trim: true
 	},
 	last_name: {
-		type: string,
-		required: true
+		type: String,
+		required: true,
+		trim: true
 	},
 	company: {
-		type: string,
+		type: String,
+		trim: true
 	},
 	email: {
-		type: string,
-		required: true
+		type: String,
+		required: true,
+		trim: true
 	},
 	phone: {
-		type: string,
+		type: String,
+		trim: true
 	},
 	address: {
-		street: string,
-		city: string,
-		state: string,
-		zip: string
+		street: String,
+		city: String,
+		state: {
+			type: String,
+			uppercase: true,
+			minlength: 2,
+			maxlength: 2
+		},
+		zip: {
+			type: String,
+			minlength: 5
+		}
 	},
 	created_on: {
 		type: Date,
@@ -36,17 +49,18 @@ const customerSchema = mongoose.Schema({
 	}
 });
 
-const Customer = module.exports = mongoose.model('Customer', customerSchema);
+const Customer = module.exports = mongoose.model('Customer', customerSchema, 'customers');
 
 // Get customers
 module.exports.getCustomers = (callback, limit) => {
-	Customer.find(callback).limit(limit).sort(['first_name', 'ascending']);
-}
+	Customer.find(callback).limit(limit).sort([['first_name', 'ascending']]);
+	// Customer.find().exec(callback);
+};
 
 // Get customer by id
 module.exports.getCustomerById = (id, callback) => {
-	Customer.findById(id, callback);
-}
+	Customer.find({_id: id}, callback);
+};
 
 // Add customer
 module.exports.addCustomer = (customer, callback) => {
@@ -64,7 +78,7 @@ module.exports.addCustomer = (customer, callback) => {
 		}
 	};
 	Customer.create(add, callback);
-}
+};
 
 // Update customer
 module.exports.updateCustomer = (id, customer, options, callback) => {
@@ -83,10 +97,10 @@ module.exports.updateCustomer = (id, customer, options, callback) => {
 		}
 	};
 	Customer.findOneAndUpdate(query, update, options, callback);
-}
+};
 
 // Remove customer by id
 module.exports.removeCustomer = (id, callback) => {
 	let query = {_id: id};
 	Customer.remove(query, callback);
-}
+};

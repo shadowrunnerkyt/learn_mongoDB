@@ -11,18 +11,21 @@ const invoiceSchema = mongoose.Schema({
 		ref: 'Customer'
 	},
 	service: {
-		type: string,
+		type: String,
 		required: true
 	},
 	price: {
-		type: string,
+		type: String,
+		trim: true
 	},
 	due: {
-		type: string
+		type: String,
+		trim: true
 	},
 	status: {
-		type: string,
-		required: true
+		type: String,
+		required: true,
+		trim: true
 	},
 	created_on: {
 		type: Date,
@@ -34,7 +37,7 @@ const Invoice = module.exports = mongoose.model('Invoice', invoiceSchema);
 
 // Get invoices
 module.exports.getInvoices = (callback, limit) => {
-	Invoice.find(callback).limit(limit).sort(['created_on', 'ascending']);
+	Invoice.find(callback).limit(limit).sort([['created_on', 'ascending']]);
 }
 
 // Get invoice by id
@@ -45,7 +48,7 @@ module.exports.getInvoiceById = (id, callback) => {
 // Get customer invoices
 module.exports.getCustomerInvoices = (customer_id, callback) => {
 	let query = {customer: customer_id};
-	Invoice.findById(query, callback).limit(limit).sort(['created_on', 'ascending']);
+	Invoice.findById(query, callback).limit(limit).sort([['created_on', 'ascending']]);
 }
 
 // Add invoice
