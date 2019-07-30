@@ -12,7 +12,7 @@ const app = express();
 const port = 3000;
 
 // mongoose connection
-mongoose.connect('mongodb://192.168.33.10:27017/invoicr', {useNewUrlParser: true});
+mongoose.connect('mongodb://192.168.33.10:27017/invoicr', {useNewUrlParser: true, useFindAndModify: false});
 // const db = mongoose.connection;
 // Client folder
 app.use(express.static(__dirname+'/client'));

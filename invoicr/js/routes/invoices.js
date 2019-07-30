@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
 	let id = req.params.id;
 	let invoice = req.body;
-	Invoice.updateInvoice( id, invoice, {}, (err, invoice) => {
+	Invoice.updateInvoice( id, invoice, {new: true, upsert: true}, (err, invoice) => {
 		if(err){errHand(err);}
 		res.json(invoice);
 	});

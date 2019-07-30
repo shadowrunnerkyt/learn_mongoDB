@@ -59,7 +59,7 @@ module.exports.getCustomers = (callback, limit) => {
 
 // Get customer by id
 module.exports.getCustomerById = (id, callback) => {
-	Customer.find({_id: id}, callback);
+	Customer.findById(id, callback);
 };
 
 // Add customer
@@ -82,8 +82,7 @@ module.exports.addCustomer = (customer, callback) => {
 
 // Update customer
 module.exports.updateCustomer = (id, customer, options, callback) => {
-	let query = {_id: id};
-	let update = {
+	let update = { $set:{
 		first_name: customer.first_name,
 		last_name: customer.last_name,
 		company: customer.company,
@@ -95,12 +94,12 @@ module.exports.updateCustomer = (id, customer, options, callback) => {
 			state: customer.address.state,
 			zip: customer.address.zip
 		}
-	};
-	Customer.findOneAndUpdate(query, update, options, callback);
+	}};
+	Customer.findByIdAndUpdate(id, update, options, callback);
 };
 
 // Remove customer by id
 module.exports.removeCustomer = (id, callback) => {
 	let query = {_id: id};
-	Customer.remove(query, callback);
+	Customer.deleteOne(query, callback);
 };

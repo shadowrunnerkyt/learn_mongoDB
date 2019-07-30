@@ -11,8 +11,8 @@ function errHand(err) {
 // Get all customers
 router.get('/', (req, res) => {
 	Customer.getCustomers( (err, customers) => {
-		if(err){errHand(err);}
 		console.log('Getting customer list['+customers.length+']');
+		if(err){errHand(err);}
 		res.json(customers);
 	});
 });
@@ -29,6 +29,7 @@ router.get('/:id', (req, res) => {
 // Add single customer
 router.post('/', (req, res) => {
 	Customer.addCustomer( req.body, (err, customer) => {
+		console.log('Adding customer: '+req.body.first_name+' '+req.body.last_name+' ['+req.body.company+']');
 		if(err){errHand(err);}
 		res.json(customer);
 	});
@@ -38,7 +39,8 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
 	let id = req.params.id;
 	let customerData = req.body;
-	Customer.updateCustomer ( id ,customerData, {}, (err, customer) => {
+	console.log('Updating customer: '+id);
+	Customer.updateCustomer ( id ,customerData, {new: true, upsert: true}, (err, customer) => {
 		if(err){errHand(err);}
 		res.json(customer);
 	});
@@ -46,7 +48,9 @@ router.put('/:id', (req, res) => {
 
 // Delete single customer
 router.delete('/:id', (req, res) => {
-	Customer.removeCustomer( req.params.id, (err, customer) => {
+	let id = req.params.id;
+	console.log('Removing customer: '+id);
+	Customer.removeCustomer( id, (err, customer) => {
 		if(err){errHand(err);}
 		res.json(customer);
 	});
