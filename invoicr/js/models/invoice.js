@@ -46,9 +46,10 @@ module.exports.getInvoiceById = (id, callback) => {
 };
 
 // Get customer invoices
-module.exports.getCustomerInvoices = (customer_id, callback) => {
+module.exports.getCustomerInvoices = (customer_id, callback, limit) => {
+	console.log('Finding invoices for customer_id: '+customer_id);
 	let query = {customer: customer_id};
-	Invoice.findById(query, callback).limit(limit).sort([['created_on', 'ascending']]);
+	Invoice.find(query, callback).limit(limit).sort([['created_on', 'ascending']]);
 };
 
 // Add invoice

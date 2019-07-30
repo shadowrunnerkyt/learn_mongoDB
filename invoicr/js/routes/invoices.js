@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 // Get single invoice
 router.get('/:id', (req, res) => {
-	Invoice.getInvoiceById( req.body.id, (err, invoices) => {
+	Invoice.getInvoiceById( req.params.id, (err, invoices) => {
 		if(err){errHand(err);}
 		res.json(invoices);
 	});
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
 
 // Get all customer invoices
 router.get('/customer/:customer_id', (req, res) => {
-	Invoice.getCustomerInvoices( req.body.customer_id, (err, invoices) => {
+	Invoice.getCustomerInvoices( req.params.customer_id, (err, invoices) => {
 		if(err){errHand(err);}
 		res.json(invoices);
 	});
@@ -35,7 +35,7 @@ router.get('/customer/:customer_id', (req, res) => {
 // Add single invoice
 router.post('/', (req, res) => {
 	let invoice = req.body;
-	Invoice.addInvoice( req.body, (err, invoice) => {
+	Invoice.addInvoice( invoice, (err, invoice) => {
 		if(err){errHand(err);}
 		res.json(invoice);
 	});
