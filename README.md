@@ -1,6 +1,6 @@
 ## [MongoDB Projects](https://www.eduonix.com/courses/Web-Development/Projects-in-MongoDB-Learn-MongoDB-Building-Ten-Projects)
 
-Customer database intro project
+[Customer database intro project]
 - MongoDB interactive mode
 
 [Product catalog](https://github.com/shadowrunnerkyt/learn_mongoDB/tree/master/catalog)
@@ -27,7 +27,7 @@ Meteorjs photo gallery
 Invoicr
 - MEAN stack
 - MongoDB
-- REST API
+- REST API (CRUD)
 - Node.js
 - Angular 2
 

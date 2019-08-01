@@ -1,3 +1,10 @@
+[windows symlinks]
+	# you can't npm install modules in a vagrant shared folder if windows won't allow symlinks
+	# use secpol.msc (if home edition, get polsedit: http://www.southsoftware.com/)
+	# add yourself to SeCreateSymbolicLinkPrivilege
+	# this alone works for us today
+	# other options here: http://perrymitchell.net/article/npm-symlinks-through-vagrant-windows/
+
 [mongoDB]<https://www.mongodb.com/>  
 	# opens interactive
 	$ mongo   
@@ -62,3 +69,23 @@
 	# set my timezome
 	sudo timedatectl set-timezone America/Kentucky/Louisville
 	
+
+[Angular CLI]<https://cli.angular.io/>
+	# install angular cli
+	# sudo npm install -g angular-cli # lots of deprications
+	sudo npm install -g @angular/cli
+	# use sudo or get permission denied for mkdir '/opt/project'
+	# probably fine if elsewhere
+	sudo ng new app-name
+	# to start the dev server
+	# since we are running 'ng serve' on a local VM, must define the host address in order to connect to it
+	# (default: localhost[the vm]) <https://github.com/angular/angular-cli/issues/1793#issuecomment-276960462>
+	ng serve --host 192.168.33.20
+	# generate a component <https://angular.io/cli/generate#component-command>
+	invoicr:
+		sudo ng g component navbar
+		sudo ng g component customers
+		sudo ng g component add-customer
+		sudo ng g component edit-customer
+		sudo ng g component customer-details
+		sudo ng g component add-invoice
